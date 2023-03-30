@@ -29,7 +29,7 @@ export const Container = styled.div`
       }
 
       //Quando tivermos a class widthdraw
-      &.widthdraw{  
+      &.withdrawal{  
         color: var(--red);
       }
       &.deposit{

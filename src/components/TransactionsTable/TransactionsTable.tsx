@@ -1,12 +1,24 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { api } from "../services/api";
 import { Container } from "./style";
 
+type TransactionsTable = {
+  id: number;
+  title: string;
+  amount: number;
+  category: string;
+  data: string;
+  type: "deposity" | "withdrawal";
+}
+
 function TransactionsTable(){
+  const [transactions, setTransactions] = useState<TransactionsTable[]>([]);
+  console.log(transactions)
   useEffect(() => {
     api.get('transactions')
-      .then(response => console.log(response.data))
+      .then(response => setTransactions(response.data))
   },[])
+
   return(
     <Container>
       <table>
@@ -18,20 +30,25 @@ function TransactionsTable(){
             <th>Data</th>
           </tr>
         </thead>
-        
+
         <tbody>
-          <tr>
-            <td>Desenvolvimento de Website</td>
-            <td className="deposit">R$12.000</td>
-            <td>Desenvolvimento</td>
-            <td>20/02/2021</td>
-          </tr>
-          <tr>
-            <td>Aluguel</td>
-            <td className="widthdraw"> - R$850</td>
-            <td>casa</td>
-            <td>15/02/2021</td>
-          </tr>
+          {transactions.map(item => (
+            <tr key={item.id}>
+              <td>{item.title}</td>
+              <td className={item.type}>
+                {/* Formatando moeda com api nativa do javascript*/}
+                {new Intl.NumberFormat('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL'
+                }).format(item.amount)}
+              </td>
+              <td>{item.category}</td>
+              <td>
+                {/* Formatando data, sua formatação deve ser "Year-mount-data" */}
+                {new Intl.DateTimeFormat('pt-BR').format(new Date(item.data))}
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </Container>
