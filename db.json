@@ -1,0 +1,12 @@
+{
+  "transactions": [
+    {
+      "id": 1,
+      "title": "Transaction",
+      "amount": 450,
+      "type": "deposit",
+      "category": "Food",
+      "data": "14:06 - 21/06/2022"
+    }
+  ]
+}
