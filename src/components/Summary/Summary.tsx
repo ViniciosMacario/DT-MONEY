@@ -17,7 +17,7 @@ function Summary(){
           <p>Saidas</p>
           <BsArrowDownCircle color="red" fontSize={35}/>
         </header>
-        <strong>R$2000.00</strong>
+        <strong>- R$2000.00</strong>
       </div>
       <div className="hightlight-background">
         <header>
