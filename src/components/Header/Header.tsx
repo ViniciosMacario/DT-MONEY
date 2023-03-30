@@ -1,7 +1,12 @@
 import { Container, Content, ContentLogo } from './styles';
 import LogoSvg from '../../assets/logo.svg'
 
-function Header(){
+type HeaderProps = {
+  onOpenNewTransactionModal: () => void
+}
+
+
+function Header({ onOpenNewTransactionModal }: HeaderProps){
   return (
     <Container>
       <Content>
@@ -9,7 +14,7 @@ function Header(){
           <img src={LogoSvg} alt='DT.MONEY_LOGO' />
           <strong>DT MONEY</strong>
         </ContentLogo>
-        <button type='button'>Nova transação</button>
+        <button type='button' onClick={onOpenNewTransactionModal}>Nova transação</button>
       </Content>
     </Container>
   )
