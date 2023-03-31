@@ -1,4 +1,4 @@
-import {createGlobalStyle} from "styled-components";
+import styled, {createGlobalStyle} from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
   :root{
@@ -87,9 +87,10 @@ export const GlobalStyle = createGlobalStyle`
     align-items: center;
     justify-content: center;
     background: transparent;
-    transition: transform 0.5s;
+    transition: transform 0.3s;
     &:hover{
-      transform: rotate(90deg);
+      transform: rotate(90deg);      fill: red;
+
     }
 
     path{

@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { darken } from "polished";
+
 
 export const Container = styled.form`
   h2{
@@ -47,5 +49,49 @@ export const Container = styled.form`
     &:hover{
       filter: brightness(0.9);
     }
+  }
+`
+
+export const TransactionTypeContainer = styled.div`
+  margin: 1rem 0;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  }
+`
+type RadioButtonProps = {
+  isActive: boolean;
+  color: string;
+}
+
+
+export const RadioButton = styled.button<RadioButtonProps>`
+  height: 4rem;
+  padding: 0.5rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  border-radius: 0.25rem;
+  border: 1.5px solid #d7d7d7;
+  background: ${(props) => props.isActive ? props.color : 'transparent'};
+
+  transition: all 0.2s;
+
+  span{
+    display: inline-block;
+    margin-left: 1rem;
+    font-size: 1rem;
+    color: ${(props) => props.isActive ? 'white' : 'var(--text-title)'};
+  }
+  path{
+    color: ${(props) => props.isActive ? 'white' : 'inhent'};
+  }
+
+  &:hover{
+    border-color: ${darken(0.5, '#d7d7d7')};
   }
 `

@@ -19,8 +19,6 @@ function Header({ onOpenNewTransactionModal }: HeaderProps){
     </Container>
   )
 }
-//AiFillDollarCircle
-//RiMoneyDollarCircleLine
-//BiDollar
+
 //BsArrowDownCircle
 export { Header };
