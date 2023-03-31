@@ -1,10 +1,12 @@
 import Modal from 'react-modal';
-import { RadioButton, Container,TransactionTypeContainer } from './styles';
-import { GrClose } from 'react-icons/gr';
-import { BsArrowDownCircle,BsArrowUpCircle } from 'react-icons/bs';
-import { useState, FormEvent } from 'react'; 
+import { useState, FormEvent, useContext } from 'react'; 
 import { api } from '../services/api';
 import { v4 } from 'uuid'
+
+import { GrClose } from 'react-icons/gr';
+import { BsArrowDownCircle,BsArrowUpCircle } from 'react-icons/bs';
+import { RadioButton, Container,TransactionTypeContainer } from './styles';
+import { TransactionsContext } from '../../TransactionsContext';
 
 type NewTransactionModalProps = {
   isOpen: boolean;
@@ -12,6 +14,9 @@ type NewTransactionModalProps = {
 }
 
 function NewTransactionModal({ isOpen, onClose }:NewTransactionModalProps){
+  const transactions = useContext(TransactionsContext);
+
+
   const [title, setTitle] = useState('');
   const [amount, setAmount] = useState(0);
   const [category, setCategory] = useState('');

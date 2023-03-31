@@ -1,14 +1,16 @@
-import { useContext} from 'react'
-import { Container } from "./styles";
+import { useContext } from 'react'
+
 import { BsArrowUpCircle, BsArrowDownCircle } from 'react-icons/bs'
 import { RiMoneyDollarCircleLine } from 'react-icons/ri'
 import { TransactionsContext } from "../../TransactionsContext";
 
+import { Container } from "./styles";
+
 function Summary(){
   //sempre que o dado no contexto mudar, todo componente que estiver usando ele será rederizando novamente.
-  const data = useContext(TransactionsContext);
+  const Transactions = useContext(TransactionsContext);
 
-  console.log(data)
+  console.log(Transactions)
   return(
     <Container>
       <div>

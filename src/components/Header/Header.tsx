@@ -5,7 +5,6 @@ type HeaderProps = {
   onOpenNewTransactionModal: () => void
 }
 
-
 function Header({ onOpenNewTransactionModal }: HeaderProps){
   return (
     <Container>
