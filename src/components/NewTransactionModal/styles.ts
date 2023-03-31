@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { darken } from "polished";
+import { darken, transparentize } from "polished";
 
 
 export const Container = styled.form`
@@ -76,8 +76,8 @@ export const RadioButton = styled.button<RadioButtonProps>`
 
   cursor: pointer;
   border-radius: 0.25rem;
-  border: 1.5px solid #d7d7d7;
-  background: ${(props) => props.isActive ? props.color : 'transparent'};
+  border: 1px solid #d7d7d7;
+  background: ${(props) => props.isActive ? transparentize(0.1, props.color) : 'transparent'};
 
   transition: all 0.2s;
 
@@ -92,6 +92,6 @@ export const RadioButton = styled.button<RadioButtonProps>`
   }
 
   &:hover{
-    border-color: ${darken(0.5, '#d7d7d7')};
+    border-color: ${darken(0.2, '#d7d7d7')};
   }
 `

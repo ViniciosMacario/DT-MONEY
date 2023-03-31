@@ -13,7 +13,7 @@ type TransactionsTable = {
 
 function TransactionsTable(){
   const [transactions, setTransactions] = useState<TransactionsTable[]>([]);
-  console.log(transactions)
+
   useEffect(() => {
     api.get('transactions')
       .then(response => setTransactions(response.data))

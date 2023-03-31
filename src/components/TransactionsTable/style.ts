@@ -32,7 +32,7 @@ export const Container = styled.div`
       &.withdrawal{  
         color: var(--red);
       }
-      &.deposit{
+      &.deposity{
         color: var(--green);
       }
     }

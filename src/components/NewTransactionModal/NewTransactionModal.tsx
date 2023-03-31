@@ -1,18 +1,36 @@
-import Modal from 'react-modal'
+import Modal from 'react-modal';
 import { RadioButton, Container,TransactionTypeContainer } from './styles';
-import { GrClose } from 'react-icons/gr'
-import { BsArrowDownCircle,BsArrowUpCircle } from 'react-icons/bs'
-import { useState } from 'react';
+import { GrClose } from 'react-icons/gr';
+import { BsArrowDownCircle,BsArrowUpCircle } from 'react-icons/bs';
+import { useState, FormEvent } from 'react'; 
+import { api } from '../services/api';
+import { v4 } from 'uuid'
 
 type NewTransactionModalProps = {
   isOpen: boolean;
   onClose: () => void;
 }
 
-
 function NewTransactionModal({ isOpen, onClose }:NewTransactionModalProps){
+  const [title, setTitle] = useState('');
+  const [amount, setAmount] = useState(0);
+  const [category, setCategory] = useState('');
+
   const [type, setType] = useState('deposity');
-  console.log(type)
+  //Quando passamos uma função para o evento "onSubmit" ela retorna para a própria função Dados/informações do próprio evento
+  function handleCreateNewTransaction(event: FormEvent){
+    event.preventDefault();
+
+    const data = {
+      id: v4(),
+      title,
+      amount,
+      category,
+      type,
+      data: new Date(),
+    }
+    api.post('/transactions', data);
+  }
 
   return(
     <Modal
@@ -25,14 +43,19 @@ function NewTransactionModal({ isOpen, onClose }:NewTransactionModalProps){
         <GrClose title='closeIcon' color='#c10f0f' />
       </button>
       
-      <Container>
+      <Container onSubmit={handleCreateNewTransaction}>
         <h2>Cadastrar Transação</h2>
         <input
           placeholder='Título'
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
         />
         <input
           type='number'
           placeholder='Valor'
+          value={amount}
+          // e.target.value retorna uma string e mesmo que vc informe que é um number, não vai funcionar, é necessário fazer uma conversão
+          onChange={(e) => setAmount(Number(e.target.value))}
         />
         <TransactionTypeContainer>
           <RadioButton 
@@ -58,6 +81,8 @@ function NewTransactionModal({ isOpen, onClose }:NewTransactionModalProps){
         </TransactionTypeContainer>
         <input
           placeholder='Categoria'
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
         />
 
         <button type="submit">Confirmar</button>
