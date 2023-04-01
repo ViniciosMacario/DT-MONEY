@@ -1,5 +1,5 @@
 import { useState, FormEvent, useContext } from 'react'; 
-import { TransactionsContext } from '../../TransactionsContext';
+import { TransactionsContext } from '../../Context/TransactionsContext';
 import Modal from 'react-modal';
 import { v4 } from 'uuid'
 

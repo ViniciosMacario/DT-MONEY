@@ -2,7 +2,7 @@ import { useContext } from 'react'
 
 import { BsArrowUpCircle, BsArrowDownCircle } from 'react-icons/bs'
 import { RiMoneyDollarCircleLine } from 'react-icons/ri'
-import { TransactionsContext } from "../../TransactionsContext";
+import { TransactionsContext } from "../../Context/TransactionsContext";
 
 import { Container } from "./styles";
 
