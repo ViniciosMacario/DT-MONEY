@@ -18,20 +18,20 @@ function TransactionsTable(){
         </thead>
 
         <tbody>
-          {transactions.map(item => (
-            <tr key={item.id}>
-              <td>{item.title}</td>
-              <td className={item.type}>
+          {transactions.map(transaction => (
+            <tr key={transaction.id}>
+              <td>{transaction.title}</td>
+              <td className={transaction.type}>
                 {/* Formatando moeda com api nativa do javascript*/}
                 {new Intl.NumberFormat('pt-BR', {
                   style: 'currency',
                   currency: 'BRL'
-                }).format(item.amount)}
+                }).format(transaction.amount)}
               </td>
-              <td>{item.category}</td>
+              <td>{transaction.category}</td>
               <td>
                 {/* Formatando data, sua formatação deve ser "Year-mount-data" */}
-                {new Intl.DateTimeFormat('pt-BR').format(new Date(item.data))}
+                {new Intl.DateTimeFormat('pt-BR').format(new Date(transaction.date))}
               </td>
             </tr>
           ))}

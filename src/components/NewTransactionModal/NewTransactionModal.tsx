@@ -22,11 +22,26 @@ function NewTransactionModal({ isOpen, onClose }:NewTransactionModalProps){
 
   const [type, setType] = useState('deposity');
   //Quando passamos uma função para o evento "onSubmit" ela retorna para a própria função Dados/informações do próprio evento
-  function handleCreateNewTransaction(event: FormEvent){
+  async function handleCreateNewTransaction(event: FormEvent){
     event.preventDefault();
-    
+
     //Enviado dados do usuário para a Api fazer a requisição post
-    createTransaction({ title,amount,category,type })
+    await createTransaction({ 
+      id: v4(),
+      title,
+      amount,
+      category,
+      type,
+      date: String(new Date()),
+    })
+    
+    //Resetando o formulário depois da requisição ser feita
+    setTitle('');
+    setAmount(0);
+    setCategory('')
+    setType('deposity')
+    //Fechando o modal após aguardar a requisição acima terminar
+    onClose();
   }
 
   return(

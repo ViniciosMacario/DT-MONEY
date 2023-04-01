@@ -1,19 +1,18 @@
 import { createContext, useEffect, useState, ReactNode } from "react";
 import { api } from "./components/services/api";
+import { v4 } from "uuid";
 
 type Transactions = {
-  id: number;
+  id: string;
   title: string;
-  amount: number;
+  amount: number ;
   category: string;
-  data: string;
+  date: string;
   type: "deposity" | "withdrawal" | string;
 }
 
 // TransactionInput vai herdar todos os tipos do Transactions exceto os "id" e "data", o typescript usa o recurso 'Omit' para omitir esses tipos
-type TransactionInput = Omit<Transactions, 'id' | 'data'>
-
-
+type TransactionInput = Omit<Transactions, 'id' |'data'>
 
 type TransactionsProviderProps = {
   //ReactNode é um tipo do próprio React para qualquer coisa
@@ -22,7 +21,8 @@ type TransactionsProviderProps = {
 
 type TransactionsContextData = {
   transactions: Transactions[],
-  createTransaction: (transaction: TransactionInput) => void
+  // Toda função assicrona retorna uma Promisse
+  createTransaction: (transaction: Transactions) => Promise<void>;
 }
 
 //Criando um Contexto com "CreateContext", uma função nativa do próprio ReactJs.
@@ -36,14 +36,20 @@ export function TransactionsProvider({children}: TransactionsProviderProps){
 
   useEffect(() =>{
     api.get('/transactions')
-      .then(response => setTransactions(response.data))
+      .then(response => {
+        setTransactions(response.data.transactions)
+      })
   },[])
 
   //Função responsável por criar uma nova transação e deixar disponível logo na requisição correta para renderizar na tela do usuário.
-  function createTransaction(transaction: TransactionInput){
-    api.post('/transactions', transaction);
-  }
+  async function createTransaction(transactionInput: Transactions){
+    const response = await api.post('/transactions', transactionInput);
 
+    const { transaction } = response.data;
+
+    //Respeitando o principio da imutabilidade
+    setTransactions([...transactions, transaction])
+  }
 
   return (
     //o Provider obrigatoriamente precisa receber o atributo "value"
