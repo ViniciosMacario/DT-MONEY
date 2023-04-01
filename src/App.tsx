@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { DashBoard } from "./components/DashBoard/DashBoard";
 import { Header } from "./components/Header/Header";
 import { NewTransactionModal } from './components/NewTransactionModal/NewTransactionModal';
-import { TransactionsContext, TransactionsProvider } from './TransactionsContext';
+import { TransactionsProvider } from './TransactionsContext';
 import Modal from 'react-modal'
 
 
@@ -16,7 +16,7 @@ export function App() {
   function HandleOpenisNewTransactionModalOpen() {
     SetIsNewTransactionModalOpen(true);
   }
-function HandleCloseisNewTransactionModalOpen() {
+  function HandleCloseisNewTransactionModalOpen() {
     SetIsNewTransactionModalOpen(false);
   }
 

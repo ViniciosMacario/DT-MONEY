@@ -1,12 +1,11 @@
-import Modal from 'react-modal';
 import { useState, FormEvent, useContext } from 'react'; 
-import { api } from '../services/api';
+import { TransactionsContext } from '../../TransactionsContext';
+import Modal from 'react-modal';
 import { v4 } from 'uuid'
 
 import { GrClose } from 'react-icons/gr';
 import { BsArrowDownCircle,BsArrowUpCircle } from 'react-icons/bs';
 import { RadioButton, Container,TransactionTypeContainer } from './styles';
-import { TransactionsContext } from '../../TransactionsContext';
 
 type NewTransactionModalProps = {
   isOpen: boolean;
@@ -14,8 +13,8 @@ type NewTransactionModalProps = {
 }
 
 function NewTransactionModal({ isOpen, onClose }:NewTransactionModalProps){
-  const transactions = useContext(TransactionsContext);
-
+  //Acessando as transações dentro do contexto.
+  const {createTransaction} = useContext(TransactionsContext);
 
   const [title, setTitle] = useState('');
   const [amount, setAmount] = useState(0);
@@ -25,16 +24,9 @@ function NewTransactionModal({ isOpen, onClose }:NewTransactionModalProps){
   //Quando passamos uma função para o evento "onSubmit" ela retorna para a própria função Dados/informações do próprio evento
   function handleCreateNewTransaction(event: FormEvent){
     event.preventDefault();
-
-    const data = {
-      id: v4(),
-      title,
-      amount,
-      category,
-      type,
-      data: new Date(),
-    }
-    api.post('/transactions', data);
+    
+    //Enviado dados do usuário para a Api fazer a requisição post
+    createTransaction({ title,amount,category,type })
   }
 
   return(

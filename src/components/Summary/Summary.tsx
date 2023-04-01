@@ -8,9 +8,8 @@ import { Container } from "./styles";
 
 function Summary(){
   //sempre que o dado no contexto mudar, todo componente que estiver usando ele será rederizando novamente.
-  const Transactions = useContext(TransactionsContext);
+  const {transactions} = useContext(TransactionsContext);
 
-  console.log(Transactions)
   return(
     <Container>
       <div>

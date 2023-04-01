@@ -19,5 +19,4 @@ function Header({ onOpenNewTransactionModal }: HeaderProps){
   )
 }
 
-//BsArrowDownCircle
 export { Header };
