@@ -1,5 +1,5 @@
-import { useState, FormEvent, useContext } from 'react'; 
-import { TransactionsContext } from '../../Context/TransactionsContext';
+import { useState, FormEvent } from 'react'; 
+import { useTransactions } from '../../Hooks/useTransactions';
 import Modal from 'react-modal';
 import { v4 } from 'uuid'
 
@@ -14,7 +14,8 @@ type NewTransactionModalProps = {
 
 function NewTransactionModal({ isOpen, onClose }:NewTransactionModalProps){
   //Acessando as transações dentro do contexto.
-  const {createTransaction} = useContext(TransactionsContext);
+    const { createTransaction } = useTransactions();
+
 
   const [title, setTitle] = useState('');
   const [amount, setAmount] = useState(0);

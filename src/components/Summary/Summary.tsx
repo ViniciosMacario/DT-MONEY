@@ -1,14 +1,13 @@
-import { useContext } from 'react'
-
 import { BsArrowUpCircle, BsArrowDownCircle } from 'react-icons/bs'
 import { RiMoneyDollarCircleLine } from 'react-icons/ri'
-import { TransactionsContext } from "../../Context/TransactionsContext";
+import { useTransactions } from "../../Hooks/useTransactions";
 
 import { Container } from "./styles";
 
 function Summary(){
   //sempre que o dado no contexto mudar, todo componente que estiver usando ele será rederizando novamente.
-  const { transactions } = useContext(TransactionsContext);
+  const { transactions } = useTransactions();
+
 
   const summary = transactions.reduce((acumulator, transaction) => {
     if(transaction.type === 'deposity'){
@@ -20,11 +19,9 @@ function Summary(){
     }
 
     return acumulator
-  }, {
-    deposity: 0,
-    withdrawal: 0,
-    total: 0
-  })
+    
+    //Definindo valor padrão
+  }, {deposity: 0,withdrawal: 0,total: 0})
 
   return(
     <Container>

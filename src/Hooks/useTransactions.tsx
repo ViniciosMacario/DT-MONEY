@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState, ReactNode } from "react";
+import { createContext, useEffect, useState, ReactNode, useContext } from "react";
 import { api } from "../components/services/api";
 
 type Transactions = {
@@ -26,7 +26,7 @@ type TransactionsContextData = {
 
 //Criando um Contexto com "CreateContext", uma função nativa do próprio ReactJs.
   // {} as TransactionsContextData é uma tecnica usada para engana o Typscript para ele parar de reclamar da tipagem, pois precisamos iniciarlizar ela com um objeto vázio.
-export const TransactionsContext = createContext<TransactionsContextData>({} as TransactionsContextData);
+const TransactionsContext = createContext<TransactionsContextData>({} as TransactionsContextData);
 
 //Para que nossa toda nossa aplicação/componentes tenham acesso ao nosso Contexto, é necessário coloca-los como filhos do "Provider", podemos envolver a aplicar no próprio arquivo "App"
 export function TransactionsProvider({children}: TransactionsProviderProps){
@@ -57,4 +57,10 @@ export function TransactionsProvider({children}: TransactionsProviderProps){
       {children}
     </TransactionsContext.Provider>
   )
+}
+
+// Um hook pode importar outros hooks, estamos apenas fazendo isso para reduzir a quantidade de importações nos nossos componentes.
+export function useTransactions() {
+  const context = useContext(TransactionsContext)
+  return context
 }
